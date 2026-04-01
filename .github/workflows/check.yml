@@ -1,0 +1,78 @@
+name: Check Password Reset Dates
+
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Year to check'
+        required: true
+        type: number
+        default: 2024
+      email:
+        description: 'Email to test'
+        required: false
+        type: string
+        default: 'Plusmember-Test@20051031.xyz'
+      start_month:
+        description: 'Start month (1-12)'
+        required: false
+        type: number
+        default: 1
+      start_day:
+        description: 'Start day (1-31)'
+        required: false
+        type: number
+        default: 1
+      end_month:
+        description: 'End month (1-12)'
+        required: false
+        type: number
+        default: 12
+      end_day:
+        description: 'End day (1-31)'
+        required: false
+        type: number
+        default: 31
+  # schedule:
+    # Optional: Run daily at 2 AM
+    # - cron: '0 2 * * *'
+
+jobs:
+  check-dates:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+    
+    - name: Run password reset check
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        python check_password_reset.py \
+          --year ${{ github.event.inputs.year || '2024' }} \
+          --email "${{ github.event.inputs.email || 'Plusmember-Test@20051031.xyz' }}" \
+          --start-month ${{ github.event.inputs.start_month || '1' }} \
+          --start-day ${{ github.event.inputs.start_day || '1' }} \
+          --end-month ${{ github.event.inputs.end_month || '12' }} \
+          --end-day ${{ github.event.inputs.end_day || '31' }}
+    
+    # - name: Upload results
+    #   if: always()
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: check-results
+    #     path: |
+    #       *.log
+    #       results.txt
