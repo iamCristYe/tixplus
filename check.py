@@ -4,6 +4,9 @@ import sys
 from datetime import datetime, timedelta
 from typing import Optional, Tuple
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class PasswordResetChecker:
     def __init__(self, telegram_bot_token: str = None, telegram_chat_id: str = None):
@@ -100,6 +103,7 @@ class PasswordResetChecker:
             checked += 1
             
             print(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
+            self.send_telegram_message(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
             
             is_found, response_text = self.check_date(email, year, month, day)
             
