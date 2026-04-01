@@ -7,7 +7,6 @@ on:
         description: 'Year to check'
         required: true
         type: number
-        default: 2024
       email:
         description: 'Email to test'
         required: false
@@ -60,7 +59,7 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python check_password_reset.py \
+        python check.py \
           --year ${{ github.event.inputs.year || '2024' }} \
           --email "${{ github.event.inputs.email || 'Plusmember-Test@20051031.xyz' }}" \
           --start-month ${{ github.event.inputs.start_month || '1' }} \
