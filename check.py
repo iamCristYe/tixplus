@@ -124,6 +124,16 @@ class PasswordResetChecker:
                 
                 return True, (year, month, day)
             
+            import time
+            import random
+
+            # Generate a random float between 10.0 and 60.0
+            sleep_time = random.uniform(10, 60)
+
+            print(f"Sleeping for {sleep_time:.2f} seconds...")
+            time.sleep(sleep_time)
+            print("Done!")
+
             # Move to next day
             current += timedelta(days=1)
             
