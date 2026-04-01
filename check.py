@@ -187,10 +187,10 @@ def main():
     
     if found:
         print(f"\n✅ Success! Working date found: {date[0]}-{date[1]:02d}-{date[2]:02d}")
-        sys.exit(0)
+
     else:
         print(f"\n❌ No working date found for year {args.year}")
-        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
