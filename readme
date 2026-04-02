@@ -1,1 +1,1 @@
-python check.py --year 2010 --email 'Plusmember-Test@20051031.xyz' --start-month 2 --start-day 1 --end-month 2 --end-day 2
+python check.py --year 2005 --email 'Plusmember-Test@20051031.xyz' --start-month 1 --start-day 1 --end-month 12 --end-day 31

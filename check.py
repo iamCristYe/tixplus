@@ -103,7 +103,8 @@ class PasswordResetChecker:
             checked += 1
             
             print(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
-            self.send_telegram_message(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
+            if not checked % 25:
+                self.send_telegram_message(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
             
             is_found, response_text = self.check_date(email, year, month, day)
             
@@ -142,9 +143,9 @@ class PasswordResetChecker:
             current += timedelta(days=1)
             
             # Send progress update every 100 days
-            if checked % 100 == 0:
-                progress_msg = f"📊 <b>Progress Update</b>\n✅ Checked: {checked}/{total_days} dates\n📅 Last checked: {current.strftime('%Y-%m-%d')}\n⏳ Remaining: {total_days - checked}"
-                self.send_telegram_message(progress_msg)
+            # if checked % 100 == 0:
+            #     progress_msg = f"📊 <b>Progress Update</b>\n✅ Checked: {checked}/{total_days} dates\n📅 Last checked: {current.strftime('%Y-%m-%d')}\n⏳ Remaining: {total_days - checked}"
+            #     self.send_telegram_message(progress_msg)
         
         # Send completion message
         complete_msg = f"🏁 <b>Check Complete</b>\n📧 Email: {email}\n📅 Year: {year}\n❌ No working date found\n📊 Total checked: {total_days}"
