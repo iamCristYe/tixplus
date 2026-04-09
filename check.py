@@ -149,7 +149,7 @@ class PasswordResetChecker:
             #     self.send_telegram_message(progress_msg)
         
         # Send completion message
-        complete_msg = f"🏁 <b>Check Complete</b>\n📧 Email: {email}\n📅 Year: {year}\n❌ No working date found\n📊 Total checked: {total_days}"
+        complete_msg = f"🏁 <b>Check Complete</b>\n📧 Email: {email}\n📅 Year: {year}\n❌ No working date found\n📊 Total checked: {total_days}\n\nhttps://github.com/iamCristYe/tixplus/actions/workflows/check.yml"
         self.send_telegram_message(complete_msg)
         
         return False, None
