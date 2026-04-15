@@ -67,6 +67,20 @@ jobs:
           --start-day ${{ github.event.inputs.start_day || '1' }} \
           --end-month ${{ github.event.inputs.end_month || '12' }} \
           --end-day ${{ github.event.inputs.end_day || '31' }}
+
+    - name: Trigger workflow for previous year
+      env:
+        GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+      run: |
+        PREV_YEAR=$(( ${{ github.event.inputs.year || '2005' }} - 1 ))
+        gh workflow run check.yml \
+          -R ${{ github.repository }} \
+          -f year=$PREV_YEAR \
+          -f email="${{ github.event.inputs.email || 'Plusmember-Test@20051031.xyz' }}" \
+          -f start_month="${{ github.event.inputs.start_month || '1' }}" \
+          -f start_day="${{ github.event.inputs.start_day || '1' }}" \
+          -f end_month="${{ github.event.inputs.end_month || '12' }}" \
+          -f end_day="${{ github.event.inputs.end_day || '31' }}"
     
     # - name: Upload results
     #   if: always()
