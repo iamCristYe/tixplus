@@ -104,8 +104,8 @@ class PasswordResetChecker:
             checked += 1
             
             print(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
-            if not checked % 25:
-                self.send_telegram_message(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
+            # if not checked % 25:
+            #     self.send_telegram_message(f"[{checked}/{total_days}] Checking {year}-{month:02d}-{day:02d}...")
             
             is_found, response_text = self.check_date(email, year, month, day)
             
